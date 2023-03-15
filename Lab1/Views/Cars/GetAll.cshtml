@@ -1,0 +1,62 @@
+﻿@*here you need to write the view which is diplayed into browser which is comming from action model
+*@
+@using Lab1.Controllers
+@model List<Car>
+@{
+    var cars = Model;
+}
+
+
+<ul>
+    <li class="row-cols-lg-4 list-unstyled  ">
+        @foreach (var car in cars)
+        {
+            var htmlDes = car.HtmlDescription;
+            var imgPath = "~/images/" + (car.Image ?? "noimage.jpg");
+            <div class="cols-lg-6   ">
+                <img width="700" src="@imgPath" asp-append-version=true />
+
+                <div class="card-body">
+                    <h5 class="card-title">Name:@($"{@car.Model} From {@car.Manufacturer}") </h5>
+                    <h6 class="card-title">Model: @car.Model</h6>
+                    <p class="card-text"><small class="text-muted">First Date Used: @car.FirstUseDate.Date</small></p>
+                      <p> Usage Duration @(DateTime.Now.Year - car.FirstUseDate.Year) Year</p>                    
+                <button type="button" class="btn btn-secondary">
+                <a  style="text-decoration:none; color:white;" href="/cars/getdetails?carModel=@car.Model&status=@Status.list">
+                         More Details
+                </a>
+            </button>
+                </div>
+            </div>
+        }
+    </li>
+</ul>
+
+<table class="table table-hover table-dark">
+    <thead>
+
+        <tr>
+            <th>#</th>
+            <th scope="col"> Name</th>
+            <th scope="col"> Model</th>
+            <th scope="col"> Details</th>
+            <th scope="col"> Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < cars.Count; i++)
+        {
+            var imgPath = "~/images/" + (cars[i].Image ?? "noimage.jpg");
+            <tr>
+                <th scope="row">@(i + 1)</th>
+                <td>@($"{@cars[i].Model} From {@cars[i].Manufacturer}")</td>
+                <td>@cars[i].Model</td>
+                @*<td>@Html.Raw(@cars[i].HtmlDescription)</td>*@
+                <td><a href="/cars/getdetails?carModel=@cars[i].Model&status=@Status.table">Details</a></td>
+
+                <td> <img width="150" src="@imgPath" asp-append-version=true /> </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

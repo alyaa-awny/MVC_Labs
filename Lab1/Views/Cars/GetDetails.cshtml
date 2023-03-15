@@ -1,0 +1,8 @@
+﻿@using Lab1.Controllers;
+@model CarDetails;
+
+
+<div>
+    <p>Came From: @Model.status</p>
+    <p> @Html.Raw(Model.car?.HtmlDescription) </p>
+</div>
