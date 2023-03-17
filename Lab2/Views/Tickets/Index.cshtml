@@ -1,0 +1,17 @@
+﻿@using Lab2.Models.Domain;
+@model List<Ticket>
+
+@{
+    var tickets = Model;
+}
+<table>
+    @{
+        foreach (var item in tickets)
+        {
+            <tr> <td> @item.Title </td></tr>
+            <tr> <td>@item.Status </td></tr>
+            <tr> <td>@item.Price</td> </tr>
+           <tr> </tr>
+        }
+    }
+</table>

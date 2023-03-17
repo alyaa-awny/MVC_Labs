@@ -1,0 +1,30 @@
+﻿@model AddActorVM
+@using Lab2.Models.Domain;
+@{
+    var countries = ViewData[MagicString.Countries] as List<Country> ?? new List<Country>();
+}
+<form asp-action="AddNewActor" method="post">
+    <label> Name</label>
+    <input type="text" name="name" />
+    <label asp-for="Mail"> </label>
+    <input asp-for="Mail" />
+    <br />
+    <label asp-for=" Password"> </label>
+    <input asp-for=" Password" />
+    <br />
+    <input asp-for="IsClose" />
+    <label asp-for="IsClose"> </label>
+    <br />
+    <label>Country </label>
+    
+    @*<select name="CountryId">@foreach (var Country in ViewBag.Countries)*@
+    <select name="CountryId">
+        @foreach (var Country in countries)
+        {
+            <option value="@Country.Id ">@Country.Name </option>
+        }
+    </select>
+   <label asp-for="Severity"> </label>
+   <select asp-for="Severity" asp-items="Html.GetEnumSelectList<Severity>()"> </select>
+    <button> Submit </button>
+</form>
